@@ -230,7 +230,7 @@ function head({ title, description, path = '/', imageUrl = '/assets/hero-collage
   <meta name="theme-color" content="#111111"><meta property="og:locale" content="es_AR"><meta property="og:type" content="website">
   <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${SITE}${imageUrl}">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="${SITE}${imageUrl}">
-  <link rel="stylesheet" href="${path === '/' ? '' : '../'}styles.css">
+  <link rel="stylesheet" href="${path === '/' ? '' : '../'}styles.css?v=20260719a">
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 </head>`;
 }

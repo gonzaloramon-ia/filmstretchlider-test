@@ -34,9 +34,7 @@ const pages = [
     hero: ['assets/cinta-embalar.jpg', 414, 287, 'Rollos de cinta adhesiva de embalar'],
     bullets: ['Transparente y marrón', 'Distintos anchos y largos', 'Compra por unidad o volumen'],
     products: [
-      ['Cinta de embalar', 'assets/cinta-embalar.jpg', 414, 287, 'Alta adhesión para armado de cajas, depósito y despacho.', 'cinta de embalar'],
-      ['Cinta impresa Frágil', 'assets/combo-deposito-final.webp', 693, 520, 'Identificación visible para bultos que requieren cuidado especial.', 'cinta impresa frágil'],
-      ['Cinta de pintor', 'assets/combo-comercio-final.webp', 693, 520, 'Para enmascarar y proteger superficies en trabajos de pintura.', 'cinta de pintor']
+      ['Cinta de embalar', 'assets/cinta-embalar.jpg', 414, 287, 'Alta adhesión para armado de cajas, depósito y despacho.', 'cinta de embalar']
     ],
     guideTitle: 'Elegí según superficie y exigencia',
     guideText: 'Para cotizar bien necesitamos saber qué se va a cerrar, el peso aproximado de la caja, la superficie y el consumo mensual. Así evitamos recomendar más material del necesario.'
@@ -207,15 +205,19 @@ function footer(prefix) {
 <script src="${prefix}script.js" defer></script>`;
 }
 
+function whatsappIcon() {
+  return `<svg viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-221.7 99.6-221.7 222 0 39.1 10.2 77.3 29.6 111L.3 480l117.7-30.9c32.4 17.7 68.9 27 106 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.3-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.8l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.4-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.1-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.6-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>`;
+}
+
 function modal() {
-  return `<button class="floating-whatsapp js-open-whatsapp" type="button" data-product="consulta general" aria-label="Consultar por WhatsApp"><span aria-hidden="true">WA</span></button>
+  return `<button class="floating-whatsapp js-open-whatsapp" type="button" data-product="consulta general" aria-label="Consultar por WhatsApp">${whatsappIcon()}</button>
 <div class="whatsapp-modal" hidden>
   <div class="modal-backdrop" data-close-modal></div>
   <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="whatsapp-title" aria-describedby="whatsapp-product">
     <button class="modal-close" type="button" data-close-modal aria-label="Cerrar">×</button>
     <p class="kicker">Atención personalizada</p><h2 id="whatsapp-title">Elegí una sucursal</h2>
     <p id="whatsapp-product" data-modal-product>Consulta general</p>
-    <div class="branch-options">${branches.map(b => `<a href="#" data-whatsapp data-phone="549${b[2]}" data-branch="${b[0]}"><strong>${b[0]}</strong><span>${b[3]}</span></a>`).join('')}</div>
+    <div class="branch-options">${branches.map(b => `<a href="#" data-whatsapp data-phone="549${b[2]}" data-branch="${b[0]}"><strong>${b[0]}</strong><span class="branch-address">${b[1]}</span><span class="branch-phone">WhatsApp: ${b[3]}</span></a>`).join('')}</div>
     <p class="modal-note">El mensaje incluirá el producto consultado para agilizar la respuesta.</p>
   </section>
 </div>`;
@@ -230,7 +232,7 @@ function head({ title, description, path = '/', imageUrl = '/assets/hero-collage
   <meta name="theme-color" content="#111111"><meta property="og:locale" content="es_AR"><meta property="og:type" content="website">
   <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${SITE}${imageUrl}">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="${SITE}${imageUrl}">
-  <link rel="stylesheet" href="${path === '/' ? '' : '../'}styles.css?v=20260719a">
+  <link rel="stylesheet" href="${path === '/' ? '' : '../'}styles.css?v=20260719b">
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 </head>`;
 }
@@ -257,7 +259,7 @@ function categoryPage(page) {
   return `<!DOCTYPE html><html lang="es-AR">${head({ title: page.title, description: page.description, path: urlPath, imageUrl: `/${page.hero[0]}`, jsonLd: ld })}<body>
 ${nav(prefix, page.slug)}<main id="contenido">
   <nav class="breadcrumbs" aria-label="Migas de pan"><a href="../index.html">Inicio</a><span aria-hidden="true">/</span><span>${page.h1}</span></nav>
-  <section class="category-hero"><div><p class="kicker">${page.kicker}</p><h1>${page.h1}</h1><p class="lead">${page.intro}</p><div class="hero-actions"><button class="button js-open-whatsapp" type="button" data-product="${esc(page.h1)}">Pedir cotización</button><a class="text-link" href="#opciones">Ver opciones</a></div><ul class="check-list">${page.bullets.map(x => `<li>${x}</li>`).join('')}</ul></div><div class="category-visual">${image(page.hero[0], page.hero[1], page.hero[2], page.hero[3], prefix, true)}</div></section>
+  <section class="category-hero"><div><p class="kicker">${page.kicker}</p><h1>${page.h1}</h1><p class="lead">${page.intro}</p><div class="hero-actions"><button class="button js-open-whatsapp" type="button" data-product="${esc(page.h1)}">Pedir cotización</button><a class="text-link" href="#opciones">Ver opciones</a></div><ul class="check-list">${page.bullets.map(x => `<li>${x}</li>`).join('')}</ul></div></section>
   <section class="section" id="opciones"><div class="section-heading"><p class="kicker">Opciones disponibles</p><h2>Encontrá la alternativa adecuada</h2><p>La disponibilidad y las especificaciones se confirman al momento de cotizar.</p></div>${page.note ? `<p class="disclaimer">${page.note}</p>` : ''}<div class="product-grid">${productCards(page.products, prefix)}</div></section>
   <section class="section guide"><div><p class="kicker">Antes de comprar</p><h2>${page.guideTitle}</h2><p>${page.guideText}</p><button class="button button-outline js-open-whatsapp" type="button" data-product="asesoramiento sobre ${esc(page.h1)}">Hablar con un asesor</button></div>${page.guideImage ? image(page.guideImage[0], page.guideImage[1], page.guideImage[2], page.guideImage[3], prefix) : '<div class="guide-mark" aria-hidden="true">✓</div>'}</section>
   <section class="section related"><div class="section-heading"><p class="kicker">También puede interesarte</p><h2>Más soluciones para tu operación</h2></div><div class="link-grid">${categories.filter(c => c[0] !== page.slug).slice(0, 4).map(c => `<a href="../${c[0]}/"><span>${c[1]}</span><small>${c[2]}</small></a>`).join('')}</div></section>
@@ -289,7 +291,7 @@ function branchesPage() {
   const urlPath = '/sucursales/';
   const ld = { '@context': 'https://schema.org', '@graph': branches.map(b => ({ '@type': 'Store', name: `Film Stretch Líder — ${b[0]}`, url: `${SITE}${urlPath}`, telephone: `+54 9 ${b[3]}`, email: b[4], address: { '@type': 'PostalAddress', streetAddress: b[1], addressCountry: 'AR' }, openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '10:00', closes: '18:00' }] })) };
   const description = 'Sucursales de Film Stretch Líder en Liniers, Lomas de Zamora y San Isidro. Teléfonos, correos, mapas y horarios de atención actualizados.';
-  return `<!DOCTYPE html><html lang="es-AR">${head({ title: 'Sucursales y contacto | Film Stretch Líder', description, path: urlPath, jsonLd: ld })}<body>${nav('../', 'sucursales')}<main id="contenido"><nav class="breadcrumbs" aria-label="Migas de pan"><a href="../index.html">Inicio</a><span aria-hidden="true">/</span><span>Sucursales</span></nav><section class="category-hero"><div><p class="kicker">Atención por zona</p><h1>Sucursales y contacto</h1><p class="lead">Elegí la sede más cercana para consultar stock, coordinar una cotización o acordar el retiro de tu pedido.</p><ul class="check-list"><li>Lunes a viernes de 10 a 18 h</li><li>Consultas por teléfono, email o WhatsApp</li><li>Retiro coordinado previamente</li></ul></div><div class="category-visual">${image('assets/hero-collage.webp',1200,882,'Productos disponibles en Film Stretch Líder','../',true)}</div></section><section class="section"><div class="section-heading"><p class="kicker">Datos directos</p><h2>Contactá la sucursal indicada</h2><p>Los teléfonos, correos y mapas son enlaces directos para evitar errores al copiar.</p></div><div class="branch-grid">${branchCards('../')}</div><p class="disclaimer"><strong>Retiros:</strong> coordiná stock y horario antes de acercarte. En Liniers se pueden acordar retiros fuera del horario habitual, de 7 a 24 h, con aviso previo.</p></section></main>${footer('../')}</body></html>`;
+  return `<!DOCTYPE html><html lang="es-AR">${head({ title: 'Sucursales y contacto | Film Stretch Líder', description, path: urlPath, jsonLd: ld })}<body>${nav('../', 'sucursales')}<main id="contenido"><nav class="breadcrumbs" aria-label="Migas de pan"><a href="../index.html">Inicio</a><span aria-hidden="true">/</span><span>Sucursales</span></nav><section class="category-hero"><div><p class="kicker">Atención por zona</p><h1>Sucursales y contacto</h1><p class="lead">Elegí la sede más cercana para consultar stock, coordinar una cotización o acordar el retiro de tu pedido.</p><ul class="check-list"><li>Lunes a viernes de 10 a 18 h</li><li>Consultas por teléfono, email o WhatsApp</li><li>Retiro coordinado previamente</li></ul></div></section><section class="section"><div class="section-heading"><p class="kicker">Datos directos</p><h2>Contactá la sucursal indicada</h2><p>Los teléfonos, correos y mapas son enlaces directos para evitar errores al copiar.</p></div><div class="branch-grid">${branchCards('../')}</div><p class="disclaimer"><strong>Retiros:</strong> coordiná stock y horario antes de acercarte. En Liniers se pueden acordar retiros fuera del horario habitual, de 7 a 24 h, con aviso previo.</p></section></main>${footer('../')}</body></html>`;
 }
 
 writeFileSync('index.html', homePage());
